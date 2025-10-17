@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Uploaded Files</title></head>
+<body>
+<h1>Uploaded Files</h1>
+<p><a href="{{ url_for('upload') }}">Upload New File</a></p>
+<table border="1">
+<tr><th>ID</th><th>Filename</th><th>Size</th><th>Uploaded At</th><th>Action</th></tr>
+{% for f in files %}
+<tr>
+<td>{{ f[0] }}</td>
+<td>{{ f[1] }}</td>
+<td>{{ f[4] }}</td>
+<td>{{ f[5] }}</td>
+<td><a href="{{ url_for('download', stored_name=f[2]) }}">Download</a></td>
+</tr>
+{% endfor %}
+</table>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>{% for m in messages %}<li>{{ m }}</li>{% endfor %}</ul>
+  {% endif %}
+{% endwith %}
+</body>
+</html>
